@@ -12,10 +12,10 @@ window:
 echo -e "#Theme config
 theme:
   fonts:
-    default:
+    system:
       name: SLK
       path: $3/fonts/SLK/regular.ttf
-      !sf::Font: !font
+      font: $(echo $)sf::Font
   
   colors:
     primary:

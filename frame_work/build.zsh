@@ -14,7 +14,7 @@ echo -e "$BBlue[BUILDING]$RESET_COLOR"
 echo -e "Creating source folder for ${BBlue}$NAME${RESET_COLOR}..."
 
 mkdir $SRC_DIR/src $SRC_DIR/src/views $SRC_DIR/src/config $SRC_DIR/src/static $SRC_DIR/src/lib $SRC_DIR/src/lib/window $SRC_DIR/src/lib/frame
-mkdir $SRC_DIR/.framework $SRC_DIR/.framework/bash $SRC_DIR/.framework/utils $SRC_DIR/.framework/cpp_refs
+mkdir $SRC_DIR/.framework $SRC_DIR/.framework/bash $SRC_DIR/.framework/utils $SRC_DIR/.framework/cpp_refs $SRC_DIR/.framework/inter
 
 # .framework/bash files #
 cp -r $FW_DIR/commands/* $SRC_DIR/.framework/bash
@@ -35,7 +35,7 @@ if [ $cpp == "commands.cpp" ]
 then
 g++ -o $SRC_DIR/src/${name[0]} $SRC_DIR/.framework/cpp_refs/$cpp &>> $FW_DIR/temp/build
 else
-g++ -o $SRC_DIR/.framework/utils/${name[0]} $SRC_DIR/.framework/cpp_refs/$cpp &>> $FW_DIR/temp/build
+g++ -l yaml-cpp -o $SRC_DIR/.framework/utils/${name[0]} $SRC_DIR/.framework/cpp_refs/$cpp &>> $FW_DIR/temp/build
 fi
 done
 
