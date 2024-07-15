@@ -1,0 +1,1 @@
+[0;34mreload-views[0m                     Reload the include_views.hpp file

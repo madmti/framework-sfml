@@ -1,0 +1,1 @@
+[0;34myaml-build[0m                       Builds the config type struct defined by the yaml files in src/config

@@ -1,0 +1,1 @@
+[0;34mhelp [0;31m<command>[0m                   Shows the instrucctions for the given command

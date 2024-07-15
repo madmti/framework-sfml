@@ -1,0 +1,1 @@
+[0;34mcreate-view [0;31m<name>[0m               Creates a view folder with the preset files

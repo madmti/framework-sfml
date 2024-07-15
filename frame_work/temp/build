@@ -1,0 +1,10 @@
+============================================================================
+commands
+============================================================================
+/home/madmti/Escritorio/Coding/C++/LIBS/framework_sfml/build/.framework/cpp_refs/commands.cpp: In function ‘std::string exec(const char*)’:
+/home/madmti/Escritorio/Coding/C++/LIBS/framework_sfml/build/.framework/cpp_refs/commands.cpp:18:44: aviso: se descartan los atributos en el argumento de plantilla ‘int (*)(FILE*)’ [-Wignored-attributes]
+   18 |     std::unique_ptr<FILE, decltype(&pclose)> pipe(popen(cmd, "r"), pclose);
+      |                                            ^
+============================================================================
+yaml-to-struct
+============================================================================
