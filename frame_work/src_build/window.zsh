@@ -3,7 +3,7 @@ echo -e "#ifndef Window_h\n#define Window_h\n#include \"../../views/include_view
 class Window {
 private:
     sf::RenderWindow win;
-    t_conf config;
+    t_config config;
     bool should_close;
 
     void display();
@@ -46,6 +46,8 @@ void Window::clear() {
     win.clear();
 };
 void Window::setup() {
+    if (!valid_config()) exit(1);
+    load_config(config);
     should_close = false;
     sf::VideoMode win_mode(config.window.width, config.window.height);
     win.create(win_mode, \"$2\");

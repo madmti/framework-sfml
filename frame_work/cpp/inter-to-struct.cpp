@@ -158,6 +158,8 @@ void print_structs() {
     };
 };
 
+// <- Cambiar a max-heap y quitar repeticiones
+
 int main(int argc, char** argv) {
     ifstream file;
     file.open(argv[2]);

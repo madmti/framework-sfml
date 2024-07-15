@@ -19,6 +19,7 @@ theme:
   
   colors:
     primary:
+      src: $(echo $)sf::Color
       rgb: [ 0, 255, 0 ]
       alpha: 255
     secondary:
