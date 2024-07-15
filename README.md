@@ -1,5 +1,7 @@
 # SFML FRAMEWORK FOR 2D GENERAL APPS
 
+Not released yet
+
 ## Installation
 
 1. clone repo
