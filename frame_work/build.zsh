@@ -47,7 +47,8 @@ done
 # Create cpp files for src/views #
 echo -e "Loading ${BGreen}views/$RESET_COLOR..."
 bash $FW_DIR/src_build/views.zsh $SRC_DIR/src/views
-bash $SRC_DIR/.framework/bash/create-view/com.zsh default
+cp -r $FW_DIR/sample_view/* $SRC_DIR/src/views
+bash $SRC_DIR/.framework/bash/reload-views/com.zsh
 
 # Create files for src/static #
 echo -e "Loading ${BGreen}static/$RESET_COLOR..."
@@ -66,7 +67,7 @@ bash $FW_DIR/src_build/include.zsh $SRC_DIR/src/lib
 # frame
 bash $FW_DIR/src_build/frame.zsh $SRC_DIR/src/lib/frame
 
-# Build config type # <----------- TODO
+# Build config type #
 echo -e "Building ${BPurple}Config type struct$RESET_COLOR..."
 bash $SRC_DIR/.framework/bash/yaml-build/com.zsh
 

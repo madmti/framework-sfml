@@ -34,13 +34,14 @@ View_${1}::View_${1}(t_config* _config) : View(\"#$1\", _config) {
     allowed_keys = vectKey{
         // Allowed keys for this view
     };
+
 };
 View_${1}::~View_${1}() {};
 
 void View_${1}::display() {
     sf::Text title(\"$1\", config->theme.fonts.system.font);
-    title.setCharacterSize(200);
-    title.setPosition(0, 0);
+    title.setCharacterSize(150);
+    title.setPosition(100, 0);
     title.setFillColor(config->theme.colors.primary.src);
 
     frame.draw(title);
