@@ -35,7 +35,7 @@ View_${1}::View_${1}(t_config* _config) : View(\"#$1\") {
 View_${1}::~View_${1}() {};
 
 void View_${1}::display() {
-    sf::Text title("title", config->theme.fonts.system.font);
+    sf::Text title(\"title\", config->theme.fonts.system.font);
     title.setCharacterSize(250);
     title.setPosition(0, 0);
     title.setFillColor(config->theme.colors.primary.src);

@@ -8,7 +8,7 @@ public:
     View(std::string _id);
     ~View();
 
-    sf::Sprite getSprite();
+    sf::Sprite get_sprite();
 
     virtual void display() = 0;
     virtual void capture(Key k) = 0;
@@ -23,7 +23,7 @@ View::View(std::string _id) {
 };
 View::~View() {};
 
-sf::Sprite getSprite() {
-    //| <- return frame sprite
+sf::Sprite View::get_sprite() {
+    return frame.get_sprite();
 };
 " &> $1/abstract.cpp

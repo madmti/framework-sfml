@@ -20,11 +20,10 @@ theme:
   colors:
     primary:
       src: $(echo $)sf::Color
-      rgb: [ 0, 255, 0 ]
-      alpha: 255
+      rgba: [ 0, 255, 0, 255 ]
     secondary:
-      rgb: [ 255, 255, 255 ]
-      alpha: 100
+      src: $(echo $)sf::Color
+      rgba: [ 255, 255, 255, 200 ]
       
 " &> $1/theme.yaml
 

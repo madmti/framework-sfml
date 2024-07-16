@@ -1,7 +1,14 @@
 echo -e "#include \"./lib/window/window.hpp\"
 
+Window win;
+
+// Prevents memory leak at exit error
+void clean_app() {
+    win.clean();
+};
+
 int main() {
-    Window win;
+    atexit(clean_app);
     win.run();
     return 0;
 };
@@ -32,8 +39,8 @@ set(CPACK_PROJECT_NAME $(echo $){PROJECT_NAME})
 set(CPACK_PROJECT_VERSION $(echo $){PROJECT_VERSION})
 include(CPack)
 
-file(COPY static DESTINATION $(echo $){PROJECT_BINARY_DIR})
-file(COPY config DESTINATION $(echo $){PROJECT_BINARY_DIR})
+file(COPY src/static DESTINATION $(echo $){PROJECT_BINARY_DIR})
+file(COPY src/config DESTINATION $(echo $){PROJECT_BINARY_DIR})
 
 find_package(SFML 2.6.1 COMPONENTS system window graphics audio REQUIRED)
 target_link_libraries($2 sfml-graphics sfml-audio sfml-system sfml-window)

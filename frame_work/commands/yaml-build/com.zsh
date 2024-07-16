@@ -56,32 +56,30 @@ void assing(std::string& ref, YAML::Node node) {
     ref = node.as<std::string>();
 };
 void assing(sf::Font& ref, YAML::Node node) {
-    std::string path = node["path"].as<std::string>();
+    std::string path = node[\"path\"].as<std::string>();
     ref.loadFromFile(path);
 };
 void assing(sf::Color& ref, YAML::Node node) {
-	int alpha;
-	assing(alpha, node["alpha"]);
-	std::vector<int> rgb;
-	for (auto it = node.begin(); it != node.end(); it++) {
+	std::vector<int> rgba;
+	for (auto it = node[\"rgba\"].begin(); it != node[\"rgba\"].end(); it++) {
 		int val;
-		assing(val, it->second);
-		rgb.push_back(val);
+		assing(val, *it);
+		rgba.push_back(val);
 	};
-	sf::Uint32 rgba = pack_rgba(rgb[0], rgb[1], rgb[2], alpha);
-	ref = sf::Color{ rgba };
+	sf::Uint32 rgba_ui = pack_rgba(rgba[0], rgba[1], rgba[2], rgba[3]);
+	ref = sf::Color{ rgba_ui };
 };
 void assing_list(std::vector<int>& ref, YAML::Node node) {
 	for (auto it = node.begin(); it != node.end(); it++) {
 		int val;
-		assing(val, it->second);
+		assing(val, *it);
 		ref.push_back(val);
 	};
 };
 void assing_list(std::vector<std::string>& ref, YAML::Node node) {
 	for (auto it = node.begin(); it != node.end(); it++) {
 		std::string val;
-		assing(val, it->second);
+		assing(val, *it);
 		ref.push_back(val);
 	};
 };

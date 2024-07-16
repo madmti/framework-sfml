@@ -74,5 +74,4 @@ bash $SRC_DIR/.framework/bash/yaml-build/com.zsh
 bash $FW_DIR/src_build/main.zsh $SRC_DIR $NAME
 
 # Final message #
-clear
 echo -e "${BGreen}[READY]$RESET_COLOR ${BBlue}$NAME$RESET_COLOR app was succesfully build at:\n${BPurple}$SRC_DIR/src$RESET_COLOR"

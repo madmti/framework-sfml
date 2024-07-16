@@ -59,20 +59,29 @@ void proccess(string& line) {
     cout << "\tif (!yaml";
     print_path(name, parent_path);
     cout << ".IsDefined() ||" << endl;
-    cout << "\t\t!yaml";
-    print_path(name, parent_path);
-    if (tp == "map") cout << ".IsMap())";
-    else if (tp == "list") cout << ".IsSequence())";
+
+    if (tp == "map") {
+        cout << "\t\t!yaml";
+        print_path(name, parent_path);
+        cout << ".IsMap())";
+    }
+    else if (tp == "list") {
+        cout << "\t\t!yaml";
+        print_path(name, parent_path);
+        cout << ".IsSequence())";
+    }
     else if (tp == "int" || tp == "bool") {
+        cout << "\t\tyaml";
+        print_path(name, parent_path);
         cout << ".IsNull() ||\n\t\t!is_" << tp << "(yaml";
         print_path(name, parent_path);
         cout << ".as<std::string>()))";
     }
     else {
+        cout << "\t\tyaml";
+        print_path(name, parent_path);
         cout << ".IsNull())";
-
-    }
-
+    };
     cout << " return false;" << endl;
 };
 

@@ -3,6 +3,7 @@ echo -e "#ifndef Window_h\n#define Window_h\n#include \"../../views/include_view
 class Window {
 private:
     sf::RenderWindow win;
+    std::map<std::string, View*> views;
     t_config config;
     bool should_close;
 
@@ -17,13 +18,21 @@ public:
     ~Window();
 
     void run();
+    void clean();
 };
-
 #endif" &> $1/window.hpp
 echo -e "#include \"./window.hpp\"
 
 Window::Window() {};
-Window::~Window() {};
+Window::~Window() {
+    clean();
+};
+
+void Window::clean() {
+    for (auto it = views.begin(); it != views.end(); it++)
+        if (it->second != nullptr)
+            delete it->second;
+};
 
 void Window::run() {
     setup();

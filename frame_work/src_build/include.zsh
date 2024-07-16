@@ -2,6 +2,7 @@ echo -e "#ifndef Include_h\n#define Include_h\n
 #include <SFML/Graphics.hpp>
 #include <yaml-cpp/yaml.h>
 #include <fstream>
+#include <iostream>
 #include <string>
 #include <vector>
 
