@@ -1,0 +1,1 @@
+Includes all the views inside src/views

@@ -29,6 +29,15 @@ std::string get_bash_dir() {
     return exec("echo -e \"$(cd $(dirname `dirname $0`) && pwd)\"/.framework/bash");
 };
 
+std::string get_custom_dir() {
+    std::string custom_dir = exec("echo -e \"$(cd $(dirname `dirname $0`) && pwd)\"/src/.custom");
+    std::string com = "test -d " + custom_dir + "echo -e \"$?\"";
+    std::string res = exec(com.c_str());
+    bool exists = !std::stoi(res.c_str());
+    if (!exists) custom_dir.clear();
+    return custom_dir;
+};
+
 int get_n_commands(std::string dir) {
     std::string com = "cd " + dir + "ls -d */ | wc -w";
     std::string str_num = exec(com.c_str());
@@ -62,9 +71,21 @@ std::map<std::string, std::string> get_commands(std::string dir) {
         if (name.empty()) continue;
         std::string com = "cd " + dir + "cd " + name + "\ncat use.txt";
         std::string usage = exec(com.c_str());
+        if (!usage.empty() && usage.back() == '\n') usage.pop_back();
         coms_map.insert_or_assign(name, usage);
     };
     return coms_map;
+};
+
+void add_custom_commands(std::map<std::string, std::string>& map, std::string& dir) {
+    std::vector<std::string> names = get_commands_names(dir);
+    for (std::string name : names) {
+        if (name.empty()) continue;
+        std::string com = "cd " + dir + "cd " + name + "\ncat use.txt";
+        std::string usage = exec(com.c_str());
+        if (!usage.empty() && usage.back() == '\n') usage.pop_back();
+        map.insert_or_assign(name, usage);
+    };
 };
 
 void print_usage_message(std::map<std::string, std::string> coms) {
@@ -84,7 +105,9 @@ std::string all_args(int argc, char** argv) {
 
 int main(int argc, char** argv) {
     std::string BASH_DIR = get_bash_dir();
+    std::string CUSTOM_DIR = get_custom_dir();
     std::map<std::string, std::string> coms = get_commands(BASH_DIR);
+    if (!CUSTOM_DIR.empty()) add_custom_commands(coms, CUSTOM_DIR);
     if (argc < 2) {
         print_usage_message(coms);
         return EXIT_FAILURE;

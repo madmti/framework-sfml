@@ -1,0 +1,1 @@
+Creates a custom command with the given name

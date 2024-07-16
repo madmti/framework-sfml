@@ -1,0 +1,1 @@
+[0;34mcustom [0;31m<command_name>[0m            Creates a custom command

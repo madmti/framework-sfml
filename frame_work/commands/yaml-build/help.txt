@@ -1,0 +1,1 @@
+Creates the struct config and its methods (load, save, valid) with all the fields defined in the yaml config file inside src/config

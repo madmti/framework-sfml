@@ -1,0 +1,1 @@
+Shows the instrucctions for the given command
