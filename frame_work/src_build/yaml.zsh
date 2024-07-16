@@ -1,5 +1,6 @@
 echo -e "#Window config
 window:
+  view_index: \"#default\"
   label: $2
   fps_limit: 60
   width: 1920

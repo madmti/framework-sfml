@@ -2,13 +2,7 @@ echo -e "#include \"./lib/window/window.hpp\"
 
 Window win;
 
-// Prevents memory leak at exit error
-void clean_app() {
-    win.clean();
-};
-
 int main() {
-    atexit(clean_app);
     win.run();
     return 0;
 };

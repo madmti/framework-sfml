@@ -13,8 +13,6 @@ mkdir $SRC_DIR/views/$1
 echo -e "#ifndef View_${1}_h\n#define View_${1}_h\n#include \"../abstract.hpp\"\n
 class View_${1}: public View {
 private:
-    vectKey allowed_keys;
-    t_config* config;
 
 public:
     View_${1}(t_config* _config);
@@ -26,8 +24,13 @@ public:
 };\n
 #endif" &> $SRC_DIR/views/$1/view.hpp
 echo -e "#include \"./view.hpp\"\n
-View_${1}::View_${1}(t_config* _config) : View(\"#$1\") {
-    config = _config;
+View_${1}::View_${1}(t_config* _config) : View(\"#$1\", _config) {
+    frame.set_config(
+        // delta pos
+        sf::Vector2f(_config->window.delta.x, _config->window.delta.y),
+        // frame size
+        sf::Vector2i(_config->window.width, _config->window.height)
+    );
     allowed_keys = vectKey{
         // Allowed keys for this view
     };
@@ -35,8 +38,8 @@ View_${1}::View_${1}(t_config* _config) : View(\"#$1\") {
 View_${1}::~View_${1}() {};
 
 void View_${1}::display() {
-    sf::Text title(\"title\", config->theme.fonts.system.font);
-    title.setCharacterSize(250);
+    sf::Text title(\"$1\", config->theme.fonts.system.font);
+    title.setCharacterSize(200);
     title.setPosition(0, 0);
     title.setFillColor(config->theme.colors.primary.src);
 

@@ -7,6 +7,12 @@ private:
     t_config config;
     bool should_close;
 
+    bool check_allowed_keys(View* view, Key k);
+    
+    void display_view();
+    void capture_view(sf::Event ev);
+    void clear_view();
+
     void display();
     void capture();
     void clear();
@@ -30,7 +36,7 @@ Window::~Window() {
 
 void Window::clean() {
     for (auto it = views.begin(); it != views.end(); it++)
-        if (it->second != nullptr)
+        if (it->second)
             delete it->second;
 };
 
@@ -39,24 +45,55 @@ void Window::run() {
     main_loop();
 };
 
+bool Window::check_allowed_keys(View* view, Key k) {
+    vectKey allowed_keys = view->get_allowed_keys();
+    for (Key key : allowed_keys)
+        if (key == k)
+            return true;
+    return false;
+};
+
+void Window::display_view() {
+    if (views.count(config.window.view_index) == 0) return;
+    View* actual_view = views[config.window.view_index];
+    actual_view->display();
+    sf::Sprite view_sprite = actual_view->get_sprite();
+    win.draw(view_sprite);
+};
+void Window::capture_view(sf::Event ev) {
+    if (ev.type != sf::Event::KeyPressed ||
+        views.count(config.window.view_index) == 0) return;
+
+    View* actual_view = views[config.window.view_index];
+
+    if (check_allowed_keys(actual_view, ev.key.code))
+        actual_view->capture(ev.key.code);
+};
+void Window::clear_view() {
+    if (views.count(config.window.view_index) == 0) return;
+    View* actual_view = views[config.window.view_index];
+    actual_view->clear();
+};
+
 void Window::display() {
-    // <- display view
+    display_view();
     win.display();
 };
 void Window::capture() {
     sf::Event ev;
     while(win.pollEvent(ev)) {
         if (ev.type == sf::Event::Closed) win.close();
-        // <- else check keys and capture view
+        capture_view(ev);
     };
 };
 void Window::clear() {
-    // <- clear view
+    clear_view();
     win.clear();
 };
 void Window::setup() {
     if (!valid_config()) exit(1);
     load_config(config);
+    views = get_all_views(&config);
     should_close = false;
     sf::VideoMode win_mode(config.window.width, config.window.height);
     win.create(win_mode, \"$2\");
