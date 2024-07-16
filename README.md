@@ -1,6 +1,6 @@
 # SFML FRAMEWORK FOR 2D GENERAL APPS
 
-Not released yet
+Available
 
 ## Installation
 
