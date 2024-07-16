@@ -6,4 +6,4 @@ source $FW_DIR/colors.txt
 
 # Program #
 echo -e "${BRed}Removing...$RESET_COLOR"
-rm -rf $SRC_DIR/src $SRC_DIR/.framework
+rm -rf $SRC_DIR/src $SRC_DIR/.framework CMakeLists.txt

@@ -14,8 +14,10 @@ echo -e "#ifndef View_${1}_h\n#define View_${1}_h\n#include \"../abstract.hpp\"\
 class View_${1}: public View {
 private:
     vectKey allowed_keys;
+    t_config* config;
+
 public:
-    View_${1}();
+    View_${1}(t_config* _config);
     ~View_${1}();
 
     void display();
@@ -24,7 +26,8 @@ public:
 };\n
 #endif" &> $SRC_DIR/views/$1/view.hpp
 echo -e "#include \"./view.hpp\"\n
-View_${1}::View_${1}() : View(\"#$1\") {
+View_${1}::View_${1}(t_config* _config) : View(\"#$1\") {
+    config = _config;
     allowed_keys = vectKey{
         // Allowed keys for this view
     };
@@ -32,14 +35,21 @@ View_${1}::View_${1}() : View(\"#$1\") {
 View_${1}::~View_${1}() {};
 
 void View_${1}::display() {
-    // Draw on the view frame
+    sf::Text title("title", config->theme.fonts.system.font);
+    title.setCharacterSize(250);
+    title.setPosition(0, 0);
+    title.setFillColor(config->theme.colors.primary.src);
+
+    frame.draw(title);
 };
 void View_${1}::capture(Key k) {
     switch(k) {
     
     };
 };
-void View_${1}::clear() {};
+void View_${1}::clear() {
+    frame.clear();
+};
 " &> $SRC_DIR/views/$1/view.cpp
 
 # exec reload-views #

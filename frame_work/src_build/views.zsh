@@ -1,8 +1,8 @@
-echo -e "#ifndef View_abstract_h\n#define View_abstract_h\n#include \"../lib/frame/frame.hpp\"
+echo -e "#ifndef View_abstract_h\n#define View_abstract_h\n#include \"../lib/frame/view/frame.hpp\"
 class View {
 protected:
     std::string v_id;
-    Frame frame;
+    Frame_view frame;
 
 public:
     View(std::string _id);

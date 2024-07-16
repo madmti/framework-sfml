@@ -5,15 +5,20 @@ rm -rf $FW_DIR/temp/*
 source $FW_DIR/colors.txt
 
 # First prompt #
+if [ -z $1 ]
+then
 echo -e "Insert the app name:"
 read -r NAME
+else
+NAME=$1
+fi
 clear
 
 # Create src folder #
 echo -e "$BBlue[BUILDING]$RESET_COLOR"
 echo -e "Creating source folder for ${BBlue}$NAME${RESET_COLOR}..."
 
-mkdir $SRC_DIR/src $SRC_DIR/src/views $SRC_DIR/src/config $SRC_DIR/src/static $SRC_DIR/src/lib $SRC_DIR/src/lib/window $SRC_DIR/src/lib/frame
+mkdir $SRC_DIR/src $SRC_DIR/src/views $SRC_DIR/src/config $SRC_DIR/src/static $SRC_DIR/src/lib $SRC_DIR/src/lib/window $SRC_DIR/src/lib/frame $SRC_DIR/src/lib/frame/view
 mkdir $SRC_DIR/.framework $SRC_DIR/.framework/bash $SRC_DIR/.framework/utils $SRC_DIR/.framework/cpp_refs $SRC_DIR/.framework/inter
 
 # .framework/bash files #
@@ -58,7 +63,7 @@ echo -e "Loading ${BGreen}lib/$RESET_COLOR..."
 bash $FW_DIR/src_build/window.zsh $SRC_DIR/src/lib/window $NAME
 # include and types
 bash $FW_DIR/src_build/include.zsh $SRC_DIR/src/lib
-# frame <----------- TODO
+# frame
 bash $FW_DIR/src_build/frame.zsh $SRC_DIR/src/lib/frame
 
 # Build config type # <----------- TODO
@@ -66,7 +71,7 @@ echo -e "Building ${BPurple}Config type struct$RESET_COLOR..."
 bash $SRC_DIR/.framework/bash/yaml-build/com.zsh
 
 # Create main.cpp file #
-bash $FW_DIR/src_build/main.zsh $SRC_DIR/src
+bash $FW_DIR/src_build/main.zsh $SRC_DIR $NAME
 
 # Final message #
 clear
