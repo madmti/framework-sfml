@@ -72,7 +72,11 @@ echo -e "Building ${BPurple}Config type struct$RESET_COLOR..."
 bash $SRC_DIR/.framework/bash/yaml-build/com.zsh
 
 # Create main.cpp file #
-bash $FW_DIR/src_build/main.zsh $SRC_DIR $NAME
+bash $FW_DIR/src_build/main.zsh $SRC_DIR/src
+
+# CMAKE #
+bash $FW_DIR/cmake/lists.zsh $SRC_DIR $NAME
+bash $FW_DIR/cmake/source_bin.zsh $SRC_DIR
 
 # Final message #
 echo -e "${BGreen}[READY]$RESET_COLOR ${BBlue}$NAME$RESET_COLOR app was succesfully build at:\n${BPurple}$SRC_DIR/src$RESET_COLOR"
